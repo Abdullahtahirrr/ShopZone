@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<!-- Basic Page Needs
+================================================== -->
+	<title>ShopZone</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+================================================== -->
+	<link rel="stylesheet" type='text/css' href="/css/style.css">
+	<link rel="stylesheet" type='text/css' href="/css/colors/orange.css">
+
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header Container
+================================================== -->
+		<header id="header-container" class="fullwidth">
+
+			<!-- Header -->
+			<div id="header">
+				<div class="container">
+
+					<!-- Left Side Content -->
+					<div class="left-side">
+
+						<!-- Logo -->
+						<div id="logo">
+							<a href="http://localhost:3000/index"><img src="/images/logo.png" alt=""></a>
+						</div>
+
+						<!-- Main Navigation -->
+						<nav id="navigation">
+							<ul id="responsive">
+
+								<li><a href="#" class="current">Home</a>
+									<ul class="dropdown-nav">
+										<li><a href="http://localhost:3000/index">Home Page</a></li>
+
+									</ul>
+								</li>
+
+								<li><a href="#">Browse</a>
+									<ul class="dropdown-nav">
+										<li><a href="http://localhost:3000/sellers-grid-layout-full-page">Browse Sellers</a>
+										</li>
+										<li><a href="http://localhost:3000/tasks-grid-layout-full-page">Browse Products</a>
+										</li>
+										<li><a href="http://localhost:3000/browsecompanyfreelancer">Browse Companies</a>
+										</li>
+									</ul>
+								</li>
+
+
+								<li><a href="#">Dashboard</a>
+									<ul class="dropdown-nav">
+										<li><a href="http://localhost:3000/single-freelancer-profile">View Profile</a>
+										</li>
+										<li><a href="http://localhost:3000/dashboard-reviews">Reviews</a></li>
+
+										<li><a href="http://localhost:3000/dashboard-my-active-bids">My Cart</a>
+										</li>
+										<li><a href="http://localhost:3000/myactivejobs">My Orders</a>
+										</li>
+										<li><a href="http://localhost:3000/dashboard-settings">Settings</a></li>
+									</ul>
+								</li>
+
+								<li><a href="http://localhost:3000/pages-contact">Contact us</a>
+								</li>
+
+							</ul>
+						</nav>
+						</nav>
+						<div class="clearfix"></div>
+						<!-- Main Navigation / End -->
+
+					</div>
+					<!-- Left Side Content / End -->
+
+
+					<!-- Right Side Content / End -->
+					<div class="right-side">
+
+
+						<!-- User Menu -->
+						<div class="header-widget">
+
+							<!-- Messages -->
+							<div class="header-notifications user-menu">
+								<div class="header-notifications-trigger">
+									<a href="#">
+										<div class="user-avatar status-online"><img src="<%= details[0].image %>"
+												alt=""></div>
+									</a>
+								</div>
+
+								<!-- Dropdown -->
+								<div class="header-notifications-dropdown">
+
+									<!-- User Status -->
+									<div class="user-status">
+
+										<!-- User Name / Avatar -->
+										<div class="user-details">
+											<div class="user-avatar status-online"><img src="<%= details[0].image %>"
+													alt=""></div>
+											<div class=" user-name">
+												<%= details[0].f_name + " " + details[0].l_name %>
+													<span>Buyer</span>
+											</div>
+										</div>
+
+										<!-- User Status Switcher -->
+										<div class="status-switch" id="snackbar-user-status">
+											<label class="user-online current-status">Online</label>
+											<label class="user-invisible">Invisible</label>
+											<!-- Status Indicator -->
+											<span class="status-indicator" aria-hidden="true"></span>
+										</div>
+									</div>
+
+									<ul class="user-menu-small-nav">
+										<li><a href="http://localhost:3000/logout/freelancer"><i
+													class="icon-material-outline-power-settings-new"></i> Logout</a>
+										</li>
+										<!-- Mobile Navigation Button -->
+										<span class="mmenu-trigger">
+											<button class="hamburger hamburger--collapse" type="button">
+												<span class="hamburger-box">
+													<span class="hamburger-inner"></span>
+												</span>
+											</button>
+										</span>
+
+								</div>
+								<!-- Right Side Content / End -->
+
+							</div>
+						</div>
+						<!-- Header / End -->
+
+		</header>
+		<div class="clearfix"></div>
+		<!-- Header Container / End -->
+		<!-- Titlebar
+================================================== -->
+		<div class="single-page-header" data-background-image="/images/single-task.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="single-page-header-inner">
+							<div class="left-side">
+								<div class="header-image"><a
+										href="http://localhost:3000/singlecompanypagefreelancer/<%= info1.seller_id %>"><img
+											src="<%= info1.image %>"" alt=""></a></div>
+								<div class=" header-details">
+										<h3>
+											<%= info1.companyname%>
+										</h3>
+										<h5>About the Seller</h5>
+										<ul>
+											<li><a href="http://localhost:3000/singlecompanypagefreelancer/<%= info1.seller_id %>""><i
+														class=" icon-material-outline-business"></i> Click for Seller
+													Details </a>
+											</li>
+											<li>
+												<div class="star-rating" data-rating="5.0"></div>
+											</li>
+											<li><img class="flag" src="/images/flags/de.svg" alt="">
+												<%=info1.headquarter%>
+											</li>
+											<li>
+												<div class="verified-badge-with-title">Verified</div>
+											</li>
+										</ul>
+								</div>
+							</div>
+							<div class="right-side">
+								<div class="salary-box">
+									<div class="salary-type"><strong><%=info.product_name%></strong></div>
+
+									<div class="salary-type">Product Price</div>
+									<div class="salary-amount">
+										PKR<%=info.price%>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Page Content
+================================================== -->
+		<div class="container">
+			<div class="row">
+
+				<!-- Content -->
+				<div class="col-xl-8 col-lg-8 content-right-offset">
+
+					<!-- Description -->
+					<div class="single-page-section">
+						<h3 class="margin-bottom-25">Product Description</h3>
+						<p>
+							<%=info.description%>
+						</p>
+
+					</div>
+
+
+					<!-- Skills -->
+					<div class="single-page-section">
+						<h3>Ships From</h3>
+						<div class="task-tags">
+							<span><%= info1.headquarter %></span>
+	
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="col-xl-8 col-lg-8 content-right-offset">
+
+				<div class="header-image"><a
+					href="#"><img
+						src="<%= info.image %>"" alt=""></a>
+				</div>
+				<div class="dashboard-content-container" data-simplebar>
+					<div class="dashboard-content-inner">
+		
+	
+		
+						<!-- Row -->
+						<div class="row">
+		
+							<!-- Dashboard Box -->
+							<div class="col-xl-12">
+								<div class="dashboard-box margin-top-0">
+		
+									<!-- Headline -->
+									<div class="headline">
+										<h3><i class="icon-material-outline-business"></i> Ratings </h3>
+									</div>
+		
+									<div class="content">
+										<ul class="dashboard-box-list">
+		
+											<% for (let i=0; i < review.length; i++) { %>
+												<li>
+													<div class="boxed-list-item">
+														<!-- Content -->
+														<div class="item-content">
+		
+																	<h4>
+																		<%= review[i].f_name + " " +
+																		review[i].l_name %>
+																	</h4>
+																		<div class="item-details margin-top-10">
+																			<div class="star-rating">Rating: <%=
+																					review[i].rating %>
+																			</div>
+																			<div class="detail-item"><i
+																					class="icon-material-outline"></i>
+																				Review Title: <%= review[i].review_title %>
+																			</div>
+																			<div class="detail-item"><i
+																				class="icon-material-outline"></i>
+																			Product: <%= review[i].product_name %>
+																		</div>
+																		</div>
+																		<div class="item-description">
+																			<p>
+																				<%= review[i].review_text %>
+																			</p>
+																		</div>
+														</div>
+												</li>
+												<% } %>
+		
+										</ul>
+									</div>
+								</div>
+		
+		
+							</div>
+		
+		
+						</div>
+						<!-- Row / End -->
+		
+		
+			</div>
+			</div>
+				
+				</div>
+
+
+				<!-- Sidebar -->
+				<div class="col-xl-4 col-lg-4">
+					<div class="sidebar-container">
+
+						<div class="countdown green margin-bottom-35">Ships in 4 days
+						</div>
+
+						<div class="sidebar-widget">
+							<form method="post" id="addcart" action="/done">
+
+								<div class="bidding-widget">
+
+
+									<div class="bidding-headline">
+										<h3>Add to Cart!</h3>
+									</div>
+									<div class="bidding-inner">
+										<input type="text" name="product_id" id="product_id" value="<%=info.product_id%>" hidden>
+
+										<!-- Headline -->
+										<span class="bidding-detail"><strong>Price </strong></span>
+
+										<span>PKR <%= info.price %></span>
+										<!-- Headline -->
+										<span class="bidding-detail margin-top-30">
+											<strong>Quantity
+												</strong></span>
+
+										<!-- Fields -->
+										
+												<div class="qtyButtons">
+													<input type="number" name="qtyInput" value="1" min="1" max="<%= info.quantity %>">
+												  </div>
+										
+							</form>
+
+							<!-- Button -->
+							<button id="snackbar-place-bid" type="submit" form="addcart"
+								class="button ripple-effect move-on-hover full-width margin-top-30"><span>Add to Cart</span></button>
+
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Sidebar Widget -->
+				<div class="sidebar-widget">
+					<h3>Bookmark </h3>
+
+					<!-- Bookmark Button -->
+					<button class="bookmark-button margin-bottom-25">
+						<span class="bookmark-icon"></span>
+						<span class="bookmark-text">Bookmark</span>
+						<span class="bookmarked-text">Bookmarked</span>
+					</button>
+
+					<!-- Share Buttons -->
+					<div class="centered-button margin-top-35">
+						<a href="#small-dialog-2" class="popup-with-zoom-anim button button-sliding-icon">Leave a Review
+							<i class="icon-material-outline-arrow-right-alt"></i></a>
+					</div>
+
+				</div>
+
+			</div>
+			
+		</div>
+		
+	<br>
+	<br>
+	</div>
+</div>
+	<!-- Spacer -->
+	<div class="margin-top-15"></div>
+	<!-- Spacer / End-->
+	<!-- Footer
+================================================== -->
+<div id="footer">
+
+	<!-- Footer Top Section -->
+	<div class="footer-top-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+
+					<!-- Footer Rows Container -->
+					<div class="footer-rows-container">
+
+						<!-- Left Side -->
+						<div class="footer-rows-left">
+							<div class="footer-row">
+								<div class="footer-row-inner footer-logo">
+									<img src="/images/logo.png" alt="">
+									<h1 style="font-size: 50px; color: blanchedalmond;">
+										<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShopZone </strong>
+									</h1>
+								</div>
+							</div>
+						</div>
+
+						<!-- Right Side -->
+						<div class="footer-rows-right">
+
+							<!-- Social Icons -->
+							<div class="footer-row">
+								<div class="footer-row-inner">
+									<ul class="footer-social-links">
+										<li>
+											<a href="#" title="Facebook" data-tippy-placement="bottom"
+												data-tippy-theme="light">
+												<i class="icon-brand-facebook-f"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="Twitter" data-tippy-placement="bottom"
+												data-tippy-theme="light">
+												<i class="icon-brand-twitter"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="Google Plus" data-tippy-placement="bottom"
+												data-tippy-theme="light">
+												<i class="icon-brand-google-plus-g"></i>
+											</a>
+										</li>
+										<li>
+											<a href="#" title="LinkedIn" data-tippy-placement="bottom"
+												data-tippy-theme="light">
+												<i class="icon-brand-linkedin-in"></i>
+											</a>
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+
+							<!-- Language Switcher -->
+							<div class="footer-row">
+								<div class="footer-row-inner">
+									<label>Language : English</label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Footer Rows Container / End -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer Top Section / End -->
+
+	<!-- Footer Middle Section -->
+	<div class="footer-middle-section">
+		<div class="container">
+			<div class="row">
+
+				<!-- Links -->
+				<div class="col-xl-2 col-lg-2 col-md-3">
+					<div class="footer-links">
+						<h3>For Buyers</h3>
+						<ul>
+							<li><a href="http://localhost:3000/tasks-grid-layout-full-page"><span>Search Products</span></a></li>
+							<li><a href="http://localhost:3000/dashboard-my-active-bids"><span>
+										My Cart</span></a></li>
+							<li><a href="http://localhost:3000/myactivejobs"><span>My Orders</span></a></li>
+
+					</div>
+				</div>
+
+
+
+				<!-- Links -->
+				<div class="col-xl-2 col-lg-2 col-md-3">
+					<div class="footer-links">
+						<h3>Helpful Links</h3>
+						<ul>
+							<li><a href="http://localhost:3000/pages-contact"><span>Contact</span></a></li>
+							<li><a href="http://localhost:3000/privacy"><span>Privacy Policy</span></a></li>
+							<li><a href="http://localhost:3000/termsofuse"><span>Terms of Use</span></a></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Links -->
+				<div class="col-xl-2 col-lg-2 col-md-3">
+					<div class="footer-links">
+						<h3>Account</h3>
+						<ul>
+							<li><a href="http://localhost:3000/single-freelancer-profile"><span>My
+										Account</span></a></li>
+						</ul>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Footer Middle Section / End -->
+
+	<!-- Footer Copyrights -->
+	<div class="footer-bottom-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					© 2023 <strong>ShopZone</strong>. All Rights Reserved.
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer Copyrights / End -->
+
+</div>
+	<!-- Footer / End -->
+
+	</div>
+	<!-- Wrapper / End -->
+
+
+
+	<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+		<!--Tabs -->
+		<div class="sign-in-form">
+
+			<ul class="popup-tabs-nav">
+				<li><a href="#tab">Leave a Review</a></li>
+			</ul>
+
+			<div class="popup-tabs-container">
+
+				<!-- Tab -->
+				<div class="popup-tab-content" id="tab">
+
+					<!-- Welcome Text -->
+					<div class="welcome-text">
+						<h3>How was the product?</h3>
+
+						<!-- Form -->
+						<form method="POST" id="leave-product-review-form" action="/giveproductreview">
+
+							<!-- Leave Rating -->
+							<div class="clearfix"></div>
+							<div class="clearfix"></div>
+							<!-- Leave Rating / End-->
+
+							<div class="row">
+								<div class="col-xl-12">
+									<div class="input-with-icon-left" title="Rate out of five"
+										data-tippy-placement="bottom">
+										<i class="icon-material-outline-star"></i>
+										<input type="number" min="0" max="5" class="input-text with-border" name="rate"
+											id="rate" placeholder="Rating" />
+
+									</div>
+								</div>
+								<div class="col-xl-12">
+									<div class="input-with-icon-left" title="Write Stranger to add review anonymously"
+										data-tippy-placement="bottom" required>
+										<i class="icon-material-outline-account-circle"></i>
+										<input type="text" class="input-text with-border" name="name" id="name"
+											placeholder="First and Last Name" />
+										<input type="text" hidden class="input-text with-border" name="id" id="id"
+											value="<%= info1.seller_id  %>" />
+											<input type="text" hidden class="input-text with-border" name="product_id" id="product_id"
+											value="<%= info.product_id  %>" />
+									</div>
+								</div>
+
+								<div class="col-xl-12">
+									<div class="input-with-icon-left">
+										<i class="icon-material-outline-rate-review"></i>
+										<input type="text" class="input-text with-border" name="reviewtitle"
+											id="reviewtitle" placeholder="Review Title" required />
+									</div>
+								</div>
+							</div>
+
+							<textarea class="with-border" placeholder="Review" name="message" id="message" cols="7"
+								required></textarea>
+
+						</form>
+
+						<!-- Button -->
+						<button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit"
+							value="Submit" form="leave-product-review-form">Leave a Review <i
+								class="icon-material-outline-arrow-right-alt"></i></button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Leave a Review Popup / End -->
+
+
+	<!-- Scripts
+================================================== -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="/js/mmenu.min.js"></script>
+	<script src="/js/tippy.all.min.js"></script>
+	<script src="/js/simplebar.min.js"></script>
+	<script src="/js/bootstrap-slider.min.js"></script>
+	<script src="/js/bootstrap-select.min.js"></script>
+	<script src="/js/snackbar.js"></script>
+	<script src="/js/clipboard.min.js"></script>
+	<script src="/js/counterup.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+	<script>
+		// Snackbar for user status switcher
+		$('#snackbar-user-status label').click(function () {
+			Snackbar.show({
+				text: 'Your status has been changed!',
+				pos: 'bottom-center',
+				showAction: false,
+				actionText: "Dismiss",
+				duration: 3000,
+				textColor: '#fff',
+				backgroundColor: '#383838'
+			});
+		});
+
+		// Snackbar for "place a bid" button
+		$('#snackbar-place-bid').click(function () {
+			Snackbar.show({
+				text: 'Your bid has been placed!',
+			});
+		});
+
+
+		// Snackbar for copy to clipboard button
+		$('.copy-url-button').click(function () {
+			Snackbar.show({
+				text: 'Copied to clipboard!',
+			});
+		}); 
+	</script>
+
+</body>
+
+</html>
