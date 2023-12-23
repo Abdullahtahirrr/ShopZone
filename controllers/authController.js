@@ -1,25 +1,6 @@
 // authController.js
-const bcrypt = require('bcrypt');
-// const db  = require('../dbConfig');
-// const connection =  db();
-const nodemailer = require('nodemailer');
-// const { connect } = require('../routes');
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'prolancerwebsite@gmail.com',
-    pass: 'yvzumfmaehebazwt',
-  },
-});
 
 class AuthController {
-  async registerUser(req, res) {
-    // Implement user registration logic here
-  }
-
   async getIndexLoggedOut(req, res) {
     try {
 const connection= req.db;
@@ -52,6 +33,54 @@ const connection= req.db;
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
+  }
+
+  async noMore(req, res) {
+      // Logic for showing an error page
+  }
+
+  async pages404(req, res) {
+      // Logic for showing an error page
+  }
+
+  async pagesContact(req, res) {
+      // Logic for displaying contact details and a form
+  }
+
+  async pagesLogin(req, res) {
+      // Logic for the login page
+  }
+
+  async pagesRegister(req, res) {
+      // Logic for the register page
+  }
+
+  async privacy(req, res) {
+      // Logic for the privacy policy page
+  }
+
+  async termsOfUse(req, res) {
+      // Logic for the terms of use page
+  }
+
+  async registerUser(req, res) {
+      // Logic for registering a new account
+  }
+
+  async loginUser(req, res) {
+      // Logic for handling login details
+  }
+
+  async contactForm(req, res) {
+      // Logic for handling the contact us form submission
+  }
+
+  async logoutCompany(req, res) {
+      // Logic for logging out a company account
+  }
+
+  async logoutFreelancer(req, res) {
+      // Logic for logging out a freelancer account
   }
 }
 
