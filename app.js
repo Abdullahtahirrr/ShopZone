@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const bodyParser = require('body-parser');
-const mysql = require('mysql2/promise');
+// const mysql = require('mysql2/promise');
 const ejsmate = require("ejs-mate")
 const path = require("path");
 const flash = require("connect-flash")
@@ -12,6 +12,7 @@ const bcrypt = require('bcrypt');
 
 const indexLoggedOutRoutes = require('./routes/index');
 const databaseMiddleware = require('./middlewares/dbmiddleware');
+const errorHandlerMiddleware = require('./middlewares/errorHandlerMiddleware');
 
 
 
@@ -47,7 +48,6 @@ const transporter = nodemailer.createTransport({
 
 const app = express();
 app.use(databaseMiddleware);
-
 app.use('/', indexLoggedOutRoutes);
 
 
@@ -184,6 +184,7 @@ app.post('/updatecart', async (req, res) => {
         res.send('Error occurred while updating cart.');
     }
 });
+
 app.post('/confirmorder', async (req, res) => {
     let cartItems = [];
     
@@ -783,12 +784,12 @@ app.get('/index', async (req, res) => {
     }
 });
 
-app.get('/nomore', (req, res) => {
-    res.render('nomore.ejs')
-});
-app.get('/pages-404', (req, res) => {
-    res.render('pages-404.ejs')
-});
+// app.get('/nomore', (req, res) => {
+//     res.render('nomore.ejs')
+// });
+// app.get('/pages-404', (req, res) => {
+//     res.render('pages-404.ejs')
+// });
 app.get('/pages-contact', (req, res) => {
     res.render('pages-contact.ejs')
 });
@@ -1487,6 +1488,9 @@ function calculateDuration(startTime) {
         return `${seconds} seconds`;
     }
 }
+
+
+app.use(errorHandlerMiddleware);
 
 
 app.listen(3000, () => {

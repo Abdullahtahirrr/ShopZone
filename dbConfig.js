@@ -1,17 +1,7 @@
 const mysql = require('mysql2/promise');
 
 let connection;
-// let connection;
-// const connect = async function example() {
-//     connection = await mysql.createConnection({
-//         host: 'localhost',
-//         user: 'root',
-//         password: '1234',
-//         database: 'ecommerce',
-//         insecureAuth: true
-//     });
-// };
-// connect();
+
 const connect = async function example() {
     try {
         if (!connection) {

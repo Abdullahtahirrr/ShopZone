@@ -9,7 +9,6 @@ router.get('/detailscompany', sellerController.companyDetails);
 router.get('/sellers-grid-layout-full-page', sellerController.sellersGridLayout);
 router.get('/index-company', sellerController.indexCompany);
 router.get('/setting-company', sellerController.settingCompany);
-router.get('/tasks-grid-layout-full-page', sellerController.tasksGridLayout);
 router.get('/logout/company', sellerController.logoutCompany);
 router.get('/single-company-profile/:seller_id', sellerController.viewSingleCompanyProfile);
 router.get('/companyprofile', sellerController.viewCompanyProfile);

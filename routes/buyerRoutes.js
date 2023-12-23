@@ -10,6 +10,8 @@ router.get('/vieworderdetails/:order_id', BuyerController.viewOrderDetails);
 router.get('/dashboard-settings', BuyerController.dashboardSettings);
 router.get('/detailsfreelancer', BuyerController.buyerDetails);
 router.get('/index', BuyerController.mainHomeScreen);
+router.get('/tasks-grid-layout-full-page', BuyerController.tasksGridLayout);
+
 router.get('/logout/freelancer', BuyerController.logoutBuyer);
 router.get('/addcart/:product_id', BuyerController.openProductPage);
 router.get('/browsecompanyfreelancer', BuyerController.browseCompanyFreelancer);
@@ -21,7 +23,7 @@ router.get('/markasdelivered/:item_id', BuyerController.markAsDelivered);
 
 router.post('/updatecart', BuyerController.updateCart);
 router.post('/confirmorder', BuyerController.confirmOrder);
-router.post('/dashboard-settings', BuyerController.updateBuyerDetails);
+router.post('/dashboard-settings', BuyerController.addBuyerDetails);
 router.post('/detailsfreelancer', BuyerController.updateBuyerDetails);
 router.post('/tasks-grid-layout-full-page', BuyerController.applyFilterProductSearch);
 router.post('/done', BuyerController.addProductToCart);

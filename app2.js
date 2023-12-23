@@ -8,6 +8,7 @@ const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const { calculateDuration } = require('./utils');
 
 // Import database configuration
 const db = require('./dbConfig');
