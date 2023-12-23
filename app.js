@@ -10,6 +10,11 @@ const fileUpload = require("express-fileupload")
 const cors = require("cors")
 const bcrypt = require('bcrypt');
 
+const indexLoggedOutRoutes = require('./routes/index');
+const databaseMiddleware = require('./middlewares/dbmiddleware');
+
+
+
 
 const nodemailer = require('nodemailer');
 
@@ -26,21 +31,25 @@ const transporter = nodemailer.createTransport({
 });
 
 
-let connection;
-const connect = async function example() {
-    connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '1234',
-        database: 'ecommerce',
-        insecureAuth: true
-    });
-};
-connect();
+// let connection;
+// const connect = async function example() {
+//     connection = await mysql.createConnection({
+//         host: 'localhost',
+//         user: 'root',
+//         password: '1234',
+//         database: 'ecommerce',
+//         insecureAuth: true
+//     });
+// };
+// connect();
 
 
 
 const app = express();
+app.use(databaseMiddleware);
+
+app.use('/', indexLoggedOutRoutes);
+
 
 app.use(fileUpload({
     createParentPath: true
@@ -743,6 +752,7 @@ app.get('/index-logged-out', async (req, res) => {
 
 app.get('/index', async (req, res) => {
     if (req.session.user) {
+        const connection=req.db;
         const query = `SELECT * FROM buyer_profile WHERE buyer_id="${req.session.user.buyer_id}"`;
         const query1 = 'SELECT * FROM seller_profile LIMIT 5';
         const query3 = "SELECT count(*) as count from products JOIN product_quantity USING(product_id)";
@@ -1095,7 +1105,7 @@ app.post('/detailscompany', async (req, res) => {
 app.post('/pages-login', async (req, res) => {
     const email = req.body.emailaddress;
     // const hash = await bcrypt.hash(req.body.password, 12);
-
+const connection=req.db;
     const AccPassword = req.body.password;
     const type = req.body.accountType
     
