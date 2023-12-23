@@ -1,5 +1,9 @@
 // sellerController.js
+const { calculateDuration } = require('../config/utils');
+const bcrypt = require('bcrypt');
+
 class SellerController {
+  
   async manageJobs(req, res, next) {
     try {
       const connection = req.db;

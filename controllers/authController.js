@@ -1,4 +1,5 @@
 // authController.js
+const bcrypt = require('bcrypt');
 
 class AuthController {
 

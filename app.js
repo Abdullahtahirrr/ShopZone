@@ -1,6 +1,6 @@
 const express = require('express');
 const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
+// const sessions = require('express-session');
 const bodyParser = require('body-parser');
 // const mysql = require('mysql2/promise');
 const ejsmate = require("ejs-mate")
@@ -17,7 +17,7 @@ const errorHandlerMiddleware = require('./middlewares/errorHandlerMiddleware');
 
 
 
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 
 // Create a transporter object
 const transporter = nodemailer.createTransport({

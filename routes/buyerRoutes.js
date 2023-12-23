@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const BuyerController = require('./buyerController');
+const BuyerController = require('../controllers/BuyerController');
 
 router.get('/browse-companies', BuyerController.browseCompanies);
 router.get('/dashboard-my-active-bids', BuyerController.viewCart);

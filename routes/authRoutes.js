@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 
-router.get('/index-logged-out', authController.indexLoggedOut);
+router.get('/index-logged-out', authController.getIndexLoggedOut);
 router.get('/nomore', authController.noMore);
 router.get('/pages-404', authController.pages404);
 router.get('/pages-contact', authController.pagesContact);

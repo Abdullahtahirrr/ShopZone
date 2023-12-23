@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sellerController = require('../controllers/sellerController');
+const sellerController = require('../controllers/SellerController');
 
 router.get('/dashboard-manage-jobs', sellerController.manageJobs);
 router.get('/updateproduct/:product_id', sellerController.updateProduct);

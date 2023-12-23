@@ -1,3 +1,6 @@
+const { calculateDuration } = require('../config/utils');
+const bcrypt = require('bcrypt');
+
 class BuyerController {
   async browseCompanies(req, res,next) {
       // Logic for browsing companies (buyer)
