@@ -4,8 +4,8 @@ async function errorHandlerMiddleware(err, req, res, next) {
   } else {
     console.error(err.stack);
     // res.status(500).send('Something went wrong!');
-    res.redirect('/nomore');
-
+    // res.redirect('/nomore');
+    res.redirect('/pages-login');
   }
 }
 

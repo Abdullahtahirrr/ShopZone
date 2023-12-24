@@ -108,7 +108,7 @@ class AuthController {
         const email = req.body.emailaddress
         const hash = await bcrypt.hash(req.body.password, 12);
         const type = req.body.accountType
-        const values = [email, hash, 1]
+        const values = [email, hash, 0]
     
         console.log(email, hash)
     
@@ -152,8 +152,8 @@ class AuthController {
         const connection = req.db;
         const email = req.body.emailaddress;
     // const hash = await bcrypt.hash(req.body.password, 12);
-    const AccPassword = req.body.password;
-    const type = req.body.accountType
+        const AccPassword = req.body.password;
+        const type = req.body.accountType
     
     if (type == "buyer") {
         const [rows] = await connection.execute(
@@ -162,7 +162,6 @@ class AuthController {
         if (rows[0]) {
             const validPass = await bcrypt.compare(AccPassword, rows[0].password)
             if (validPass) {
-                // await connection.execute(`Update buyer_accounts SET status=1 where email="${email}"`)
                 req.session.user = rows[0];
                 let userProperties = Object.keys(req.session.user);
 
@@ -188,8 +187,11 @@ console.log(userProperties);
         if (rows[0]) {
             const validPass = await bcrypt.compare(AccPassword, rows[0].password);
             if (validPass) {
-                await connection.execute(`Update seller_accounts SET status=1 where email="${email}"`)
-                req.flash("mess", "Logged in Successfully");
+              req.session.user = rows[0];
+              let userProperties = Object.keys(req.session.user);
+
+              console.log(userProperties);
+              req.flash("success", "Logged in Successfully");
                 // req.session.__id = email;
                 res.redirect("/index-company");
             } else {
@@ -212,30 +214,30 @@ console.log(userProperties);
       // Logic for handling the contact us form submission
       try {
          // Extract the form data from the request body
-    const name = req.body.name;
-    const email = req.body.email;
-    const subject = req.body.subject;
-    const comments = req.body.comments;
-    console.log(name);
+          const name = req.body.name;
+          const email = req.body.email;
+          const subject = req.body.subject;
+          const comments = req.body.comments;
+          console.log(name);
 
-    // Send the message using the transporter object
-    transporter.sendMail({
-        from: email,
-        to: "prolancerwebsite@gmail.com",
-        subject: 'New message from contact form',
-        text: `From: ${name} (${email}) Subject: ${subject}\n\n${comments}`
-    }, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.send('An error occurred while sending the message.');
-        } else {
-            console.log(`Message sent: ${info.response}`);
-            res.redirect("/pages-contact")
-        }
-    })
-      } catch (error) {
-        next(error);
-      }
+          // Send the message using the transporter object
+          transporter.sendMail({
+              from: email,
+              to: "prolancerwebsite@gmail.com",
+              subject: 'New message from contact form',
+              text: `From: ${name} (${email}) Subject: ${subject}\n\n${comments}`
+          }, (error, info) => {
+              if (error) {
+                  console.log(error);
+                  res.send('An error occurred while sending the message.');
+              } else {
+                  console.log(`Message sent: ${info.response}`);
+                  res.redirect("/pages-contact")
+              }
+          })
+            } catch (error) {
+              next(error);
+            }
   }
 
   async logoutCompany(req, res,next) {

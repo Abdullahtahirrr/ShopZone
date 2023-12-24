@@ -5,7 +5,7 @@ class BuyerController {
   async browseCompanies(req, res,next) {
       // Logic for browsing companies (buyer)
       try {
-        const connection = req.db;
+        const connection =  req.db;
         const [companies] = await connection.execute(`SELECT * FROM seller_profile`);
         let [details] = await connection.execute(`SELECT * FROM buyer_profile WHERE buyer_id=(Select buyer_id from buyer_accounts where status=1)`);
         if (!details[0]) {
