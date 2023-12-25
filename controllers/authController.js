@@ -153,7 +153,7 @@ class AuthController {
         const email = req.body.emailaddress;
     // const hash = await bcrypt.hash(req.body.password, 12);
         const AccPassword = req.body.password;
-        const type = req.body.accountType
+        const type = req.body.accountType;
     
     if (type == "buyer") {
         const [rows] = await connection.execute(

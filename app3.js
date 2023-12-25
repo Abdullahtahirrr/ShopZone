@@ -52,7 +52,21 @@ app.use('/', authRoutes);
 app.use('/', buyerRoutes);
 app.use('/', sellerRoutes);
 
-
+// // Define a route to view open sessions
+// app.get('/open-sessions', (req, res) => {
+//     const sessions = req.sessionStore; // Get the session store
+  
+//     // Get all sessions
+//     const allSessions = sessions.all((err, sessions) => {
+//       if (err) {
+//         console.error('Error fetching sessions:', err);
+//         res.status(500).send('Error fetching sessions');
+//         return;
+//       }
+  
+//       res.json(allSessions);
+//     });
+//   });
 app.use(errorHandlerMiddleware);
 
 

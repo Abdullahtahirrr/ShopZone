@@ -140,14 +140,8 @@ class SellerController {
         const [nooffls] = await connection.execute('SELECT count(*) as count from buyer_accounts');
         const [nooftasks] = await connection.execute('SELECT count(*) as count from product_categories');
         const [noofcs] = await connection.execute('SELECT count(*) as count from seller_accounts');
-        res.render('index-company.ejs', {
-            details: details,
-            freelancer: freelancer,
-            noofjobs: noofjobs[0].count,
-            nooffls: nooffls[0].count,
-            nooftasks: nooftasks[0].count,
-            noofcs: noofcs[0].count
-        });
+        res.render('index-company.ejs', { details: details, freelancer: freelancer, noofjobs: noofjobs, nooffls: nooffls, nooftasks: nooftasks, noofcs: noofcs })
+
     } catch (error) {
         next(error);
     }
