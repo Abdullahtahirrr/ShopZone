@@ -37,16 +37,20 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(sessions(sessionConfig));
-app.use((req, res, next) => {
-    res.locals.current_user = req.session.__id;
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.locals.current_user = req.session.__id;
+//     res.locals.success = req.flash("success");
+//     res.locals.error = req.flash("error");
+//     next();
+// });
 
 // Set up transporter in your app
 app.set('transporter', transporter);
-
+app.use((req, res, next) => {
+    req.transporter = transporter; // Attach transporter to the req object
+    req.path = path;
+    next();
+});
 app.use(databaseMiddleware);
 app.use('/', authRoutes);
 app.use('/', buyerRoutes);
@@ -55,7 +59,7 @@ app.use('/', sellerRoutes);
 // // Define a route to view open sessions
 // app.get('/open-sessions', (req, res) => {
 //     const sessions = req.sessionStore; // Get the session store
-  
+
 //     // Get all sessions
 //     const allSessions = sessions.all((err, sessions) => {
 //       if (err) {
@@ -63,7 +67,7 @@ app.use('/', sellerRoutes);
 //         res.status(500).send('Error fetching sessions');
 //         return;
 //       }
-  
+
 //       res.json(allSessions);
 //     });
 //   });

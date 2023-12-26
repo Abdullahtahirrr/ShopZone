@@ -23,8 +23,8 @@ router.get('/markasdelivered/:item_id', BuyerController.markAsDelivered);
 
 router.post('/updatecart', BuyerController.updateCart);
 router.post('/confirmorder', BuyerController.confirmOrder);
-router.post('/dashboard-settings', BuyerController.addBuyerDetails);
-router.post('/detailsfreelancer', BuyerController.updateBuyerDetails);
+router.post('/dashboard-settings', BuyerController.updateBuyerDetails);
+router.post('/detailsfreelancer', BuyerController.addBuyerDetails);
 router.post('/tasks-grid-layout-full-page', BuyerController.applyFilterProductSearch);
 router.post('/done', BuyerController.addProductToCart);
 router.post('/giveproductreview', BuyerController.giveProductReview);

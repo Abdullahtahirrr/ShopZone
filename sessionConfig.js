@@ -5,9 +5,9 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        expires: Date.now() + 63072000000,
+        maxAge: 63072000000,
     },
     resave: false
 };
-module.exports=sessionConfig;
+module.exports = sessionConfig;
