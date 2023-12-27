@@ -1,4 +1,5 @@
 const { calculateDuration } = require('../config/utils');
+
 const bcrypt = require('bcrypt');
 const path = require('path');
 
@@ -48,7 +49,7 @@ class BuyerController {
 
       const [cartItems] = await connection.execute(query, [userId]);
 
-      res.render('dashboard-my-active-bids.ejs', { details: details, cartItems: cartItems });
+      res.render('dashboard-my-active-cart.ejs', { details: details, cartItems: cartItems });
     } catch (error) {
       next(error);
     }
@@ -65,7 +66,7 @@ class BuyerController {
       await connection.execute(`DELETE FROM cart_items WHERE product_id = ? AND cart_id = ?`, [productId, cartId]);
       await connection.execute(`UPDATE product_quantity SET quantity = quantity + ? WHERE product_id = ?`, [quan[0].qua, productId]);
 
-      res.redirect('/dashboard-my-active-bids');
+      res.redirect('/dashboard-my-active-cart');
     } catch (error) {
       next(error);
     }
@@ -91,7 +92,7 @@ class BuyerController {
         GROUP BY o.order_id, oi.order_status
       `);
 
-      res.render('myactivejobs.ejs', { orders: orders, details: details });
+      res.render('myorders.ejs', { orders: orders, details: details });
     } catch (error) {
       next(error);
     }
@@ -146,12 +147,13 @@ class BuyerController {
   async buyerDetails(req, res, next) {
     try {
       const connection = req.db;
+      console.log(req.session.user);
       const buyerId = req.session.user.buyer_id;
-
-      let [details] = await connection.execute(`SELECT * FROM buyer_profile WHERE buyer_id = ?`, [buyerId]);
+      console.log(buyerId);
+      // let [details] = await connection.execute(`SELECT * FROM buyer_profile WHERE buyer_id = ?`, [buyerId]);
       const [id] = await connection.execute(`SELECT * FROM buyer_accounts WHERE buyer_id = ?`, [buyerId]);
 
-      res.render('detailsfreelancer.ejs', { emailaddress: id[0].email, details: details });
+      res.render('detailsfreelancer.ejs', { emailaddress: id[0].email });
     } catch (error) {
       next(error);
     }
@@ -196,7 +198,7 @@ class BuyerController {
       next(error);
     }
   }
-  async tasksGridLayout(req, res, next) {
+  async productsGridLayout(req, res, next) {
     try {
       const connection = req.db;
       const buyerId = req.session.user.buyer_id;
@@ -210,25 +212,24 @@ class BuyerController {
         JOIN seller_profile sp ON sp.seller_id = p.seller_id
       `);
 
-      res.render('tasks-grid-layout-full-page.ejs', { products: products, calculateDuration: calculateDuration, details: details });
+      res.render('products-grid-layout-full-page.ejs', { products: products, calculateDuration: calculateDuration, details: details });
     } catch (error) {
       next(error);
     }
   }
 
-  async logoutBuyer(req, res, next) {
-    // Logic for logging out buyer account
-    try {
-      const connection = req.db;
+  // async logoutBuyer(req, res, next) {
+  //   // Logic for logging out buyer account
+  //   try {
 
-      // Fetch data
+  //     // Fetch data
 
-      // Render template with fetched data
-      res.render('index-company.ejs', { /* Pass data here */ });
-    } catch (error) {
-      next(error);
-    }
-  }
+  //     // Render template with fetched data
+  //     res.render('index-company.ejs', { /* Pass data here */ });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 
   async openProductPage(req, res, next) {
     try {
@@ -427,7 +428,7 @@ class BuyerController {
         );
       }
 
-      res.redirect('/dashboard-my-active-bids');
+      res.redirect('/dashboard-my-active-cart');
     } catch (error) {
       next(error);
     }
@@ -727,7 +728,7 @@ class BuyerController {
 
       const [details] = await connection.execute(`SELECT * FROM buyer_profile WHERE buyer_id="${buyerId}"`)
 
-      res.render('tasks-grid-layout-full-page.ejs', { products: products, calculateDuration: calculateDuration, details: details });
+      res.render('products-grid-layout-full-page.ejs', { products: products, calculateDuration: calculateDuration, details: details });
 
     } catch (error) {
       next(error);

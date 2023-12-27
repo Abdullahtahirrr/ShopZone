@@ -1,5 +1,7 @@
 // authController.js
 const bcrypt = require('bcrypt');
+const { getUserDetails } = require('../config/userDetails');
+
 
 class AuthController {
 
@@ -40,7 +42,16 @@ class AuthController {
 
   async noMore(req, res, next) {
     try {
-      res.render('nomore.ejs')
+      const connection = req.db;
+const loggedInUser = req.session.user;
+
+if (!loggedInUser) {
+    return res.redirect('/pages-login');
+}
+
+// Call the getUserDetails function to retrieve user details
+const { userType, details } = await getUserDetails(connection, loggedInUser);
+      res.render('nomore.ejs',{details:details})
     } catch (error) {
       next(error);
     }
@@ -57,7 +68,17 @@ class AuthController {
   async pagesContact(req, res, next) {
     // Logic for displaying contact details and a form
     try {
-      res.render('pages-contact.ejs')
+      const connection = req.db;
+const loggedInUser = req.session.user;
+
+if (!loggedInUser) {
+    return res.redirect('/pages-login');
+}
+
+// Call the getUserDetails function to retrieve user details
+const { userType, details } = await getUserDetails(connection, loggedInUser);
+
+      res.render('pages-contact.ejs',{details:details})
     } catch (error) {
       next(error);
     }
@@ -87,7 +108,16 @@ class AuthController {
   async privacy(req, res, next) {
     // Logic for the privacy policy page
     try {
-      res.render('privacy.ejs')
+      const connection = req.db;
+const loggedInUser = req.session.user;
+
+if (!loggedInUser) {
+    return res.redirect('/pages-login');
+}
+
+// Call the getUserDetails function to retrieve user details
+const { userType, details } = await getUserDetails(connection, loggedInUser);
+      res.render('privacy.ejs',{details:details})
     } catch (error) {
       next(error);
     }
@@ -96,7 +126,16 @@ class AuthController {
   async termsOfUse(req, res, next) {
     // Logic for the terms of use page
     try {
-      res.render('termsofuse.ejs')
+      const connection = req.db;
+const loggedInUser = req.session.user;
+
+if (!loggedInUser) {
+    return res.redirect('/pages-login');
+}
+
+// Call the getUserDetails function to retrieve user details
+const { userType, details } = await getUserDetails(connection, loggedInUser);
+      res.render('termsofuse.ejs',{details:details})
     } catch (error) {
       next(error);
     }
@@ -105,6 +144,8 @@ class AuthController {
   async registerUser(req, res, next) {
     // Logic for registering a new account
     try {
+      const connection = req.db;
+
       const email = req.body.emailaddress
       const hash = await bcrypt.hash(req.body.password, 12);
       const type = req.body.accountType
@@ -123,7 +164,10 @@ class AuthController {
           // insert user into the database
 
           const response = await connection.execute(query, values)
+          const [rows]=await connection.execute(`SELECT * FROM buyer_accounts WHERE buyer_id = "${response[0].insertId}"`)
+          console.log(rows[0]);
 
+          req.session.user = rows[0];
           res.redirect('/detailsfreelancer')
         }
       }
@@ -139,6 +183,9 @@ class AuthController {
           // insert user into the database
 
           const result = await connection.execute(query, values);
+          const [rows]=await connection.execute(`SELECT * FROM seller_accounts WHERE seller_id = "${result[0].insertId}"`)
+          req.session.user = rows[0];
+
           res.redirect('/detailscompany')
         }
       }
@@ -163,6 +210,8 @@ class AuthController {
         if (rows[0]) {
           const validPass = await bcrypt.compare(AccPassword, rows[0].password)
           if (validPass) {
+            console.log(rows[0]);
+
             req.session.user = rows[0];
             let userProperties = Object.keys(req.session.user);
 

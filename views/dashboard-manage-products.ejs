@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<!-- Basic Page Needs
+================================================== -->
+	<title>ShopZone</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+================================================== -->
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/colors/orange.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+
+
+			<%- include('../partials/header') %>
+
+		<div class="clearfix"></div>
+		<!-- Header Container / End -->
+
+		<!-- Dashboard Container -->
+		<div class="dashboard-container">
+
+
+			<!-- Dashboard Content
+	================================================== -->
+			<div class="dashboard-content-container" data-simplebar>
+				<div class="dashboard-content-inner">
+
+					<!-- Dashboard Headline -->
+					<div class="dashboard-headline">
+						<h3>Manage Products</h3>
+
+						<!-- Breadcrumbs -->
+						<nav id="breadcrumbs" class="dark">
+							<ul>
+								<li><a href="http://localhost:3000/index-company">Home</a></li>
+								<li><a href="http://localhost:3000/index-company">Dashboard</a></li>
+								<li>Manage Products</li>
+							</ul>
+						</nav>
+					</div>
+
+					<!-- Row -->
+					<div class="row">
+
+						<!-- Dashboard Box -->
+						<div class="col-xl-12">
+							<div class="dashboard-box margin-top-0">
+
+								<!-- Headline -->
+								<div class="headline">
+									<h3><i class="icon-material-outline-assignment"></i> My Products</h3>
+								</div>
+
+								<div class="content">
+									<% for (let i=0; i < info1.length; i++) { %>
+										<ul class="dashboard-box-list">
+											<li>
+												<!-- Job Listing -->
+												<div class="job-listing width-adjustment">
+
+													<!-- Job Listing Details -->
+													<div class="job-listing-details">
+
+														<!-- Details -->
+														<div class="job-listing-description">
+															<h3 class="job-listing-title"><a href="#"></a>
+																<%=info1[i].product_name%>
+																	</a> <span
+																		class="dashboard-status-button yellow"></span>
+															</h3>
+
+															<!-- Job Listing Footer -->
+															<div class="job-listing-footer">
+																<ul>
+																	<li><i
+																			class="icon-material-outline-access-time"></i>
+																		<%= calculateDuration(info1[i].time_posted) %>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<!-- Task Details -->
+												<ul class="dashboard-task-info">
+									
+													<li><strong>PKR<%=info1[i].price%></strong><span>Price</span>
+													</li>
+													<li><strong><%=info1[i].quantity%></strong><span>Quantity in Stock</span>
+													</li>
+												</ul>
+
+												<!-- Buttons -->
+												<div class="buttons-to-right always-visible">
+													<a href="http://localhost:3000/updateproduct/<%=info1[i].product_id %>"
+														class="button ripple-effect"><i
+															class="icon-material-outline-supervisor-account"></i> Update
+														Product <span class="button-info">3</span></a>
+													<a href="#" class="button gray ripple-effect ico" title="Edit"
+														data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+													<a href="http://localhost:3000/removeproduct/<%=info1[i].product_id %>"
+														class="button gray ripple-effect ico" title="Remove"
+														data-tippy-placement="top"><i
+															class="icon-feather-trash-2"></i></a>
+												</div>
+											</li>
+										</ul>
+										<%}%>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- Row / End -->
+
+					
+
+				</div>
+			</div>
+			<!-- Dashboard Content / End -->
+
+		</div>
+		<!-- Dashboard Container / End -->
+		<%- include('../partials/footer') %>
+
+	</div>
+	<!-- Wrapper / End -->
+
+
+	<!-- Scripts
+================================================== -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="/js/mmenu.min.js"></script>
+	<script src="/js/tippy.all.min.js"></script>
+	<script src="/js/simplebar.min.js"></script>
+	<script src="/js/bootstrap-slider.min.js"></script>
+	<script src="/js/bootstrap-select.min.js"></script>
+	<script src="/js/snackbar.js"></script>
+	<script src="/js/clipboard.min.js"></script>
+	<script src="/js/counterup.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+	<script>
+		// Snackbar for user status switcher
+		$('#snackbar-user-status label').click(function () {
+			Snackbar.show({
+				text: 'Your status has been changed!',
+				pos: 'bottom-center',
+				showAction: false,
+				actionText: "Dismiss",
+				duration: 3000,
+				textColor: '#fff',
+				backgroundColor: '#383838'
+			});
+		}); 
+	</script>
+
+</body>
+
+</html>

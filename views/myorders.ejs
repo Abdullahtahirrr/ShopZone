@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<!-- Basic Page Needs
+================================================== -->
+	<title>ShopZone</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+================================================== -->
+	<link rel="stylesheet" type='text/css' href="/css/style.css">
+	<link rel="stylesheet" type='text/css' href="/css/colors/orange.css">
+
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+
+
+			<%- include('../partials/header') %>
+
+		<div class="clearfix"></div>
+		<!-- Header Container / End -->
+		<!-- Dashboard Container -->
+		<div class="dashboard-container">
+
+
+
+			<!-- Dashboard Content
+	================================================== -->
+			<div class="dashboard-content-container" data-simplebar>
+				<div class="dashboard-content-inner">
+
+					<!-- Dashboard Headline -->
+					<div class="dashboard-headline">
+						<h3>My Orders</h3>
+
+						<!-- Breadcrumbs -->
+						<nav id="breadcrumbs" class="dark">
+							<ul>
+								<li><a href="http://localhost:3000/index">Home</a></li>
+								<li><a href="http://localhost:3000/index">Dashboard</a></li>
+								<li>My Orders</li>
+							</ul>
+						</nav>
+					</div>
+
+					<!-- Row -->
+					<div class="row">
+						<!-- Dashboard Box -->
+						<div class="col-xl-12">
+							<div class="dashboard-box margin-top-0">
+					
+								<!-- Headline -->
+								<div class="headline">
+									<h3><i class="icon-material-outline-gavel"></i> Orders List</h3>
+								</div>
+					
+								<div class="content">
+									<ul class="dashboard-box-list">
+										<% for (let i = 0; i < orders.length; i++) { %>
+										<li>
+											<!-- Order Details -->
+											<div class="order-listing width-adjustment">
+					
+												<!-- Order Details Description -->
+												<div class="order-listing-description">
+													<h3 class="order-listing-title">
+														Order ID: <%= orders[i].order_id %>
+													</h3>
+													<p class="order-listing-text">
+														Total Products: <%= orders[i].total_products %>
+													</p>
+													<p class="order-listing-text">
+														Order Total: PKR <%= orders[i].total %>
+													</p>
+													<p class="order-listing-text">
+														Payment Type: <%= orders[i].payment_choice %>
+													</p>
+													<p class="order-listing-text">
+														<% if (orders[i].order_status === "Pending") { %>
+														Status: Pending
+														<% } else if (orders[i].order_status === "Shipping") { %>
+														<a class="button" href="/markasshipped/<%= orders[i].order_id %>">Mark as
+															Shipped</a>
+														<% } else if (orders[i].order_status === "Shipped") { %>
+														Status: Shipped
+														<% } %>
+													</p>
+													<p class="order-listing-text">
+														<a href="/vieworderdetails/<%= orders[i].order_id %>">View Order Details</a>
+													</p>
+												</div>
+											</div>
+										</li>
+										<% } %>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+			<!-- Row / End -->
+
+		</div>
+	</div>
+	<!-- Dashboard Content / End -->
+
+	</div>
+	<!-- Dashboard Container / End -->
+	<%- include('../partials/footer') %>
+
+
+
+
+	</div>
+	<!-- Wrapper / End -->
+
+	<!-- Scripts
+================================================== -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="/js/mmenu.min.js"></script>
+	<script src="/js/tippy.all.min.js"></script>
+	<script src="/js/simplebar.min.js"></script>
+	<script src="/js/bootstrap-slider.min.js"></script>
+	<script src="/js/bootstrap-select.min.js"></script>
+	<script src="/js/snackbar.js"></script>
+	<script src="/js/clipboard.min.js"></script>
+	<script src="/js/counterup.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+	<script>
+		// Snackbar for user status switcher
+		$('#snackbar-user-status label').click(function () {
+			Snackbar.show({
+				text: 'Your status has been changed!',
+				pos: 'bottom-center',
+				showAction: false,
+				actionText: "Dismiss",
+				duration: 3000,
+				textColor: '#fff',
+				backgroundColor: '#383838'
+			});
+		}); 
+	</script>
+
+</body>
+
+</html>

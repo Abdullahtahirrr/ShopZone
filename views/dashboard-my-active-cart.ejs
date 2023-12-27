@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+	<!-- Basic Page Needs
+================================================== -->
+	<title>ShopZone</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+================================================== -->
+	<link rel="stylesheet" type='text/css' href="/css/style.css">
+	<link rel="stylesheet" type='text/css' href="/css/colors/orange.css">
+
+</head>
+
+<body>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+
+
+			<%- include('../partials/header') %>
+
+		<div class="clearfix"></div>
+		<!-- Header Container / End -->
+		<!-- Dashboard Container -->
+		<div class="dashboard-container">
+
+
+
+
+
+
+			<!-- Dashboard Content
+	================================================== -->
+			<div class="dashboard-content-container" data-simplebar>
+				<div class="dashboard-content-inner">
+
+					<!-- Dashboard Headline -->
+					<div class="dashboard-headline">
+						<h3>My Cart</h3>
+
+						<!-- Breadcrumbs -->
+						<nav id="breadcrumbs" class="dark">
+							<ul>
+								<li><a href="http://localhost:3000/index">Home</a></li>
+								<li><a href="http://localhost:3000/index">Dashboard</a></li>
+								<li>My Active Bids</li>
+							</ul>
+						</nav>
+					</div>
+
+					<!-- Row -->
+					<div class="row">
+						<!-- Dashboard Box -->
+						<div class="col-xl-12">
+							<div class="dashboard-box margin-top-0">
+					
+								<!-- Headline -->
+								<div class="headline">
+									<h3><i class="icon-material-outline-gavel"></i> Items List</h3>
+								</div>
+					
+								<div class="content">
+					
+									<form id="updateCartForm" action="/updatecart" method="post">
+					
+										<ul class="dashboard-box-list">
+											<% let cartTotal = 0; %>
+											<% for (let i = 0; i < cartItems.length; i++) { %>
+											<% const itemTotal = cartItems[i].price * cartItems[i].quantity; %>
+											<% cartTotal += itemTotal; %>
+											<li>
+												<!-- Job Listing -->
+												<div class="job-listing width-adjustment">
+													<!-- Job Listing Details -->
+													<div class="job-listing-details">
+														<!-- Details -->
+														<div class="job-listing-description">
+															<h3 class="job-listing-title"><a href="#">
+																	<%= cartItems[i].product_name %>
+																</a></h3>
+														</div>
+													</div>
+												</div>
+					
+												<!-- Task Details -->
+												<ul class="dashboard-task-info">
+													<li>
+														<strong>PKR <%= cartItems[i].price %></strong>
+													</li>
+													<li>
+														<!-- Quantity Buttons -->
+														<div class="qtyButtons">
+															<input type="number" name="cartItems[<%= i %>][quantity]" value="<%= cartItems[i].quantity %>"
+																min="1" max="<%= cartItems[i].max_quantity + cartItems[i].quantity %>">
+														</div>
+													</li>
+													<li>
+														<strong>PKR <%= itemTotal %></strong><span>Item Total</span>
+													</li>
+													<li>
+														<!-- Option to remove item from cart -->
+														<a href="/removecartitem/<%= cartItems[i].cart_id %>/<%= cartItems[i].product_id %>">Remove</a>
+													</li>
+					
+													<!-- Hidden input fields for cart item details -->
+													<input type="hidden" name="cartItems[<%= i %>][cart_id]" value="<%= cartItems[i].cart_id %>">
+													<input type="hidden" name="cartItems[<%= i %>][product_id]" value="<%= cartItems[i].product_id %>">
+												</ul>
+											</li>
+											<% } %>
+										</ul>
+					
+										<!-- Display the Cart Total -->
+										
+										
+										
+										<!-- Payment Options -->
+										<div class="payment-container ">
+											
+											<div class="payment-options">
+												<h4>Payment Options</h4>
+												
+												
+												<label>
+													<input class="payment-options" type="radio" name="paymentOption" value="COD" checked>
+													Cash on Delivery (COD)
+												</label>
+												<label>
+													<input class="payment-options" type="radio" name="paymentOption" value="online">
+													Online Payment
+												</label>
+
+											</div>
+										</div>
+										<div class="total-column">
+											<strong>Cart Total: PKR <%= cartTotal %></strong>
+										</div>
+					
+										<!-- Add an Update Cart button to submit the changes -->
+										<a class="btn btn-info" role="button">
+											<button class="button ripple-effect margin-top-30" type="submit"
+												<%= cartItems.length === 0 ? 'disabled' : '' %> >
+												Update Cart
+												<i class="icon-material-outline-arrow-right-alt"></i>
+											</button>
+										</a>
+			
+										<!-- Add a Confirm Order button -->
+										<a class="btn btn-info" role="button">
+											<button class="button ripple-effect margin-top-30" type="submit"
+												formaction="/confirmorder" <%= cartItems.length === 0 ? 'disabled' : '' %>>
+												Confirm Order
+												<i class="icon-material-outline-arrow-right-alt"></i>
+											</button>
+										</a>
+			
+					
+									</form>
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					
+
+				</div>
+			</div>
+			<!-- Dashboard Content / End -->
+
+		</div>
+		<!-- Dashboard Container / End -->
+		<%- include('../partials/footer') %>
+
+
+
+
+	</div>
+	<!-- Wrapper / End -->
+	<!-- Scripts-->
+<!-- ================================================== -->
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/jquery-migrate-3.0.0.min.js"></script>
+	<script src="/js/mmenu.min.js"></script>
+	<script src="/js/tippy.all.min.js"></script>
+	<script src="/js/simplebar.min.js"></script>
+	<script src="/js/bootstrap-slider.min.js"></script>
+	<script src="/js/bootstrap-select.min.js"></script>
+	<script src="/js/snackbar.js"></script>
+	<script src="/js/clipboard.min.js"></script>
+	<script src="/js/counterup.min.js"></script>
+	<script src="/js/magnific-popup.min.js"></script>
+	<script src="/js/slick.min.js"></script>
+	<script src="/js/custom.js"></script>
+
+	<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+	<script>
+		// Snackbar for user status switcher
+		$('#snackbar-user-status label').click(function () {
+			Snackbar.show({
+				text: 'Your status has been changed!',
+				pos: 'bottom-center',
+				showAction: false,
+				actionText: "Dismiss",
+				duration: 3000,
+				textColor: '#fff',
+				backgroundColor: '#383838'
+			});
+		}); 
+	</script>
+
+</body>
+
+</html>

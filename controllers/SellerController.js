@@ -5,7 +5,7 @@ const path = require('path');
 
 class SellerController {
 
-  async manageJobs(req, res, next) {
+  async manageOrders(req, res, next) {
     try {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
@@ -30,7 +30,7 @@ class SellerController {
             ORDER BY orders.order_id DESC
         `, [loggedInSellerId]);
 
-      res.render('dashboard-manage-jobs.ejs', { orders: rows, calculateDuration: calculateDuration, details: details });
+      res.render('dashboard-manage-orders.ejs', { orders: rows, calculateDuration: calculateDuration, details: details });
     } catch (error) {
       next(error);
     }
@@ -74,7 +74,7 @@ class SellerController {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
       const [details] = await connection.execute(`SELECT * FROM seller_profile WHERE seller_id = ?`, [loggedInSellerId]);
-      res.render('dashboard-post-a-task.ejs', { details });
+      res.render('dashboard-post-a-product.ejs', { details });
     } catch (error) {
       next(error);
     }
@@ -86,10 +86,10 @@ class SellerController {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
 
-      const [details] = await connection.execute(`SELECT * FROM seller_profile WHERE seller_id = ?`, [loggedInSellerId]);
-      // const [id] = await connection.execute(`SELECT * FROM seller_accounts WHERE status=1`)
+      // const [details] = await connection.execute(`SELECT * FROM seller_profile WHERE seller_id = ?`, [loggedInSellerId]);
+      const [id] = await connection.execute(`SELECT * FROM seller_accounts WHERE seller_id = ?`, [loggedInSellerId])
       // res.render('detailscompany.ejs', { emailaddress: id[0].email, details: details })
-      res.render('detailscompany.ejs', { emailaddress: details[0].email, details: details })
+      res.render('detailscompany.ejs', { emailaddress: id[0].email })
 
     } catch (error) {
       next(error);
@@ -261,7 +261,7 @@ class SellerController {
     }
   }
 
-  async manageTasks(req, res, next) {
+  async manageProducts(req, res, next) {
     try {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
@@ -283,7 +283,7 @@ class SellerController {
 
       let info1 = rows;
 
-      res.render('dashboard-manage-tasks.ejs', {
+      res.render('dashboard-manage-products.ejs', {
         info1: info1,
         calculateDuration: calculateDuration,
         details: details
@@ -305,7 +305,7 @@ class SellerController {
 
       const item_id = req.params.item_id;
       await connection.execute(`UPDATE order_items SET order_status="Shipped" WHERE item_id=${item_id}`);
-      res.redirect(`/dashboard-manage-jobs`);
+      res.redirect(`/dashboard-manage-orders`);
     } catch (error) {
       next(error);
     }
@@ -323,13 +323,13 @@ class SellerController {
 
       const item_id = req.params.item_id;
       await connection.execute(`UPDATE order_items SET order_status="Shipped" WHERE item_id=${item_id}`);
-      res.redirect(`/dashboard-manage-jobs`);
+      res.redirect(`/dashboard-manage-orders`);
     } catch (error) {
       next(error);
     }
   }
 
-  async removeTask(req, res, next) {
+  async removeProduct(req, res, next) {
     try {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
@@ -344,7 +344,7 @@ class SellerController {
       await connection.execute(`DELETE FROM product_quantity WHERE product_id=${taskid}`);
       await connection.execute(`DELETE FROM product_tags WHERE product_id=${taskid}`);
       await connection.execute(`DELETE FROM reviews WHERE product_id=${taskid}`);
-      res.redirect(`/dashboard-manage-tasks`);
+      res.redirect(`/dashboard-manage-products`);
     } catch (error) {
       next(error);
     }
@@ -589,12 +589,9 @@ class SellerController {
       let picpath = ""
       try {
         const samplepic = req.files.picture;
-        // console.log("HEREEEE!@#$%^&*");
 
         const uploadpathpic = path.join(__dirname, '../public/uploads/', samplepic.name);
-        // console.log("HEREEEE!@#$%^&*");
-        // console.log(uploadpathpic);
-        // const uploadpathpic = __dirname + "/public/uploads/" + samplepic.name
+
         picpath = "/uploads/" + samplepic.name
         samplepic.mv(uploadpathpic, function (err) {
           if (err) return res.status(500).send(err)
@@ -624,7 +621,7 @@ class SellerController {
 
           // Update the hashed password in the database
           await connection.execute(
-            `UPDATE seller_accounts SET password="${hashedPassword}" WHERE seller_id="${id[0].id}"`
+            `UPDATE seller_accounts SET password="${hashedPassword}" WHERE seller_id="${id[0].seller_id}"`
           );
         } else {
           req.flash("mess", "Current Password Entered is not correct");
@@ -666,7 +663,7 @@ class SellerController {
       });
 
       // Assuming you have stored the user's ID in the session
-      const userId = req.session.user.id; // Adjust this based on your session structure
+      const userId = req.session.user.seller_id; // Adjust this based on your session structure
 
       const query = `
         INSERT INTO seller_profile (seller_id, companyname, email, companytype, intro, image, headquarter)
