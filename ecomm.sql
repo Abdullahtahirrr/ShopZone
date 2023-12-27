@@ -166,3 +166,8 @@ SELECT * FROM products
 JOIN product_posted_time USING (product_id)
 JOIN product_categories USING (category_id)
 JOIN product_quantity USING (product_id);
+
+ALTER TABLE buyer_accounts
+DROP COLUMN status;
+ALTER TABLE seller_accounts
+DROP COLUMN status;
