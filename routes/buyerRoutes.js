@@ -12,7 +12,6 @@ router.get('/detailsfreelancer', BuyerController.buyerDetails);
 router.get('/index', BuyerController.mainHomeScreen);
 router.get('/products-grid-layout-full-page', BuyerController.productsGridLayout);
 
-// router.get('/logout/freelancer', BuyerController.logoutBuyer);W
 router.get('/addcart/:product_id', BuyerController.openProductPage);
 router.get('/browsecompanyfreelancer', BuyerController.browseCompanyFreelancer);
 router.get('/singlecompanypagefreelancer/:seller_id', BuyerController.viewSingleCompanyPageFreelancer);

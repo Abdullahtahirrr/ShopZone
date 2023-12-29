@@ -14,7 +14,6 @@ const connect = async function example() {
         });
         console.log('Connected to database'); // Optionally log a success message
     }
-        // console.log(connection); // Optionally log a success message
 
         return connection; // Return the connection after it's established
     } catch (error) {

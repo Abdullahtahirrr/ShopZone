@@ -10,17 +10,9 @@ class SellerController {
       const connection = req.db;
       const loggedInSellerId = req.session.user ? req.session.user.seller_id : null;
 
-      // if (!loggedInSellerId) {
-      //     // Redirect to login or handle the case where the user is not logged in
-      //     return res.redirect('/pages-login');
-      // }
 
       const [details] = await connection.execute(`SELECT * FROM seller_profile WHERE seller_id = ?`, [loggedInSellerId]);
 
-      // if (!details || details.length === 0) {
-      //     // Handle case where seller details are not found
-      //     return res.render('error-page.ejs', { errorMessage: 'Seller details not found.' });
-      // }
 
       const [rows] = await connection.execute(`
             SELECT * FROM orders 
